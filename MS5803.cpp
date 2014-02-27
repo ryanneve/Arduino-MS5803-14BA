@@ -120,7 +120,7 @@ void MS5803::readSensor() {
     
     // calculate 2nd order pressure and temperature (MS5803 2st order algorithm)
     temp = ( 2000 + (deltaTemp * sensorCoefficients[6] ) / pow( 2, 23 ) ) / 100; 
-    press = ( ( ( ( D1 * sensitivity ) / pow( 2, 21 ) - sensorOffset) / pow( 2, 15 ) ) / 10 );
+    press = ( ( ( ( D1 * sensitivity ) / pow( 2, 21 ) - sensorOffset) / pow( 2, 15 ) ) / 100 );
     
 }
 
@@ -215,8 +215,8 @@ unsigned char MS5803::ms5803CRC4(unsigned int n_prom[]) {
 // Use this method to send commands to the sensor.  Pretty much just used to read the pressure and temp data.
 unsigned long MS5803::ms5803CmdAdc(char cmd) {
 
-    unsigned int result = 0;
-    unsigned long returnedData = 0;
+    unsigned long result = 0;
+    unsigned int returnedData = 0;
     
     if ( interface ) {
     	SPI.setDataMode( SPI_MODE3 );
